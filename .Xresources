@@ -67,9 +67,11 @@ URxvt*scrollColor: S_base0
 URxvt*cursorBlink: false
 URxvt*pointerBlank: true
 
-URxvt*font: xft:Source Code Pro:size=11
+URxvt*font: xft:Source Code Pro:size=12
 
 URxvt*saveLines: 65535
+
+URxvt*urgentOnBell: true
 
 URxvt*perl-ext-common: default, clipboard
 URxvt.clipboard.autocopy: true
