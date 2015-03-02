@@ -11,11 +11,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-setxkbmap 'us,hu' ',qwerty' caps:ctrl_modifier grp:win_space_toggle grp_led:caps
 xset b off
+numlockx on
 xrdb -merge .Xresources
-# exec gnome-session
-# exec startkde
-# exec startxfce4
-# ...or the Window Manager of your choice
 exec i3
