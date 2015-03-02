@@ -6,6 +6,8 @@ filetype plugin on    " Enable filetype-specific plugin
 
 set number
 
+set ruler
+
 set expandtab
 set shiftwidth=2
 set softtabstop=2
@@ -16,5 +18,6 @@ set ignorecase
 set smartcase
 
 set hlsearch
+set incsearch
 set showmatch
 set cursorline
