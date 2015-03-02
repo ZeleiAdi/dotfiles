@@ -73,5 +73,5 @@ URxvt*saveLines: 65535
 
 URxvt*urgentOnBell: true
 
-URxvt*perl-ext-common: default, clipboard
+URxvt*perl-ext-common: default,clipboard
 URxvt.clipboard.autocopy: true
