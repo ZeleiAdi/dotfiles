@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bit/sh
 #
 # ~/.xinitrc
 #

@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "pkg-info" "pkg-info.el" (21712 50994 623850
-;;;;;;  317000))
-;;; Generated autoloads from pkg-info.el
+;;;### (autoloads nil "pkg-info" "../../../../.emacs.d/elpa/pkg-info-20140610.630/pkg-info.el"
+;;;;;;  "980cb4f716e188e641f5f43ca46e1a10")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/pkg-info-20140610.630/pkg-info.el
 
 (autoload 'pkg-info-library-original-version "pkg-info" "\
 Get the original version in the header of LIBRARY.
@@ -111,6 +111,12 @@ is the same as the LIBRARY version, do not include a package
 version.
 
 \(fn LIBRARY &optional PACKAGE SHOW)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/pkg-info-20140610.630/pkg-info-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/pkg-info-20140610.630/pkg-info.el")
+;;;;;;  (21802 22446 819110 120000))
 
 ;;;***
 
