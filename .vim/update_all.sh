@@ -7,5 +7,5 @@ packages=(
 for package in "${packages[@]}"
 do
     package_path=$(echo "$package" | sed -r 's|.*/([^/]+/[^/]+)|\1|')
-    curl -v "$package" > "$package_path"
+    curl "$package" > "$package_path"
 done

@@ -52,7 +52,7 @@ set cpo&vim
 " @@IDENTIFIER@@         "\%(@@IDENT_NONDIGIT@@\%(@@IDENT_CHAR@@\|[-']@@IDENT_NONDIGIT@@\@=\)*\)"
 " @@IDENTIFIER_START@@   "@@IDENT_CHAR@@\@1<!\%(@@IDENT_NONDIGIT@@[-']\)\@2<!"
 " @@IDENTIFIER_END@@     "\%(@@IDENT_CHAR@@\|[-']@@IDENT_NONDIGIT@@\)\@!"
-" @@METAOP@@             #\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".([:space:]]\)\+#
+" @@METAOP@@             #\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".[:space:]]\)\+#
 " @@ADVERBS@@            "\%(\_s*:!\?@@IDENTIFIER@@\%(([^)]*)\)\?\)*"
 "
 " Same but escaped, for use in string eval
@@ -67,7 +67,7 @@ syn match p6Identifier display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[
 
 let s:keywords = {
  \ "p6DeclareRoutine": [
- \   "macro sub submethod method multi proto only category",
+ \   "macro sub submethod method multi proto only category unit",
  \ ],
  \ "p6Module": [
  \   "module class role package enum grammar slang subset",
@@ -182,7 +182,7 @@ syn match p6Operator display "\%(\s\|^\)\@1<=\%(xx=\|p5=>\)"
 syn match p6Operator display "\%(&\.(\@=\|@\.\[\@=\|%\.{\@=\)"
 
 " Reduce metaoperators like [+]
-syn match p6ReduceOp display "\%(^\|\s\|(\)\@1<=!*\%([RSXZ\[]\)*[&RSXZ]\?\[\+(\?\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".([:space:]]\)\+)\?]\+"
+syn match p6ReduceOp display "\%(^\|\s\|(\)\@1<=!*\%([RSXZ\[]\)*[&RSXZ]\?\[\+(\?\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".[:space:]]\)\+)\?]\+"
 syn match p6SetOp    display "R\?(\%([-^.+|&]\|[<>][=+]\?\|cont\|elem\))"
 
 " Reverse, cross, and zip metaoperators
@@ -202,7 +202,7 @@ syn match p6BinNumber  display "[01][01_]*" contained
 syn match p6HexNumber  display "\x[[:xdigit:]_]*" contained
 syn match p6DecNumber  display "\d[[:digit:]_]*" contained
 
-syn match p6Version    display "\<v\d\+\%(\.[*[:digit:]]\+\)*+\?"
+syn match p6Version    display "\<v\d\+\%(\.\%(\*\|\d\+\)\)*+\?"
 
 " Contextualizers
 syn match p6Context display "\<\%(item\|list\|slice\|hash\)\>"
@@ -350,7 +350,7 @@ syn region p6Adverb
 "   for " = < ... >" assignments though.
 " * It comes after "enum", "for", "any", "all", or "none"
 " * It's the first or last thing on a line (ignoring whitespace)
-" * It's preceded by "= "
+" * It's preceded by "(\s*" or "=\s\+"
 " * It's empty and terminated on the same line (e.g. <> and < >)
 "
 " It never matches when:
@@ -364,7 +364,7 @@ syn region p6StringAngle
     \ start="[<+~=!]\@1<!<\%(\s\|<\|=>\|[-=]\{1,2}\)\@!"
     \ start="\%(^\s*\)\@<=<\%(<\|=>\|[-=]\{1,2}>\@!\)\@!"
     \ start="[<+~=!]\@1<!<\%(\s*$\)\@="
-    \ start="\%(=\s\+\)\@<=<\%(<\|=>\|[-=]\{1,2}>\@!\)\@!"
+    \ start="\%((\s*\|=\s\+\)\@<=<\%(<\|=>\|[-=]\{1,2}>\@!\)\@!"
     \ start="<\%(\s*>\)\@="
     \ skip="\\\@1<!\\>"
     \ end=">"
@@ -422,10 +422,10 @@ syn region p6InnerFrench
 " them, but before other types of strings, to avoid matching those delimiters
 " as parts of hyperops.
 syn match p6HyperOp display #[^[:digit:][{('",:[:space:]][^[{('",:[:space:]]*\%(«\|<<\)#
-syn match p6HyperOp display "«\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".([:space:]]\)\+[«»]"
-syn match p6HyperOp display "»\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".([:space:]]\)\+\%(«\|»\?\)"
-syn match p6HyperOp display "<<\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".([:space:]]\)\+\%(<<\|>>\)"
-syn match p6HyperOp display ">>\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".([:space:]]\)\+\%(<<\|\%(>>\)\?\)"
+syn match p6HyperOp display "«\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".[:space:]]\)\+[«»]"
+syn match p6HyperOp display "»\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".[:space:]]\)\+\%(«\|»\?\)"
+syn match p6HyperOp display "<<\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".[:space:]]\)\+\%(<<\|>>\)"
+syn match p6HyperOp display ">>\%(\d\|[@%$][.?^=[:alpha:]]\)\@!\%(\.\|[^[{('".[:space:]]\)\+\%(<<\|\%(>>\)\?\)"
 
 " 'string'
 syn region p6StringSQ
@@ -507,12 +507,6 @@ unlet s:plain_delims s:all_delims
 " :key
 syn match p6Operator display ":\@1<!::\@!!\?" nextgroup=p6Key,p6StringAngleFixed,p6StringAngles,p6StringFrench
 syn match p6Key display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)" contained nextgroup=p6StringAngleFixed,p6StringAngles,p6StringFrench
-
-" => and p5=> autoquoting
-syn match p6StringP5Auto display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)\ze\s\+p5=>"
-syn match p6StringAuto   display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)\ze\%(p5\)\@2<![RSXZ]\@1<!=>"
-syn match p6StringAuto   display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)\ze\s\+=>"
-syn match p6StringAuto   display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)p5\ze=>"
 
 " Regexes and grammars
 
@@ -1004,7 +998,7 @@ endif
 syn match p6Attention display "\<\%(ACHTUNG\|ATTN\|ATTENTION\|FIXME\|NB\|TODO\|TBD\|WTF\|XXX\|NOTE\)" contained
 
 " normal end-of-line comment
-syn match p6Comment display "#`\@!.*" contains=p6Attention
+syn match p6Comment display "#.*" contains=p6Attention
 
 " Multiline comments. Arbitrary numbers of opening brackets are allowed,
 " but we only define regions for 1 to 3
@@ -1101,6 +1095,12 @@ syn region p6BracketComment
     \ contains=p6Attention,p6BracketComment
 
 syn match p6Shebang display "\%^#!.*"
+
+" => and p5=> autoquoting
+syn match p6StringP5Auto display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)\ze\s\+p5=>"
+syn match p6StringAuto   display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)\ze\%(p5\)\@2<![RSXZ]\@1<!=>"
+syn match p6StringAuto   display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)\ze\s\+=>"
+syn match p6StringAuto   display "\%([A-Za-z_\xC0-\xFF]\%([A-Za-z_\xC0-\xFF0-9]\|[-'][A-Za-z_\xC0-\xFF]\@=\)*\)p5\ze=>"
 
 " Pod
 

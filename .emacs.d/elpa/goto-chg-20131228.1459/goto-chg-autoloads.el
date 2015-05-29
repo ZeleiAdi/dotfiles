@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "goto-chg" "goto-chg.el" (21694 28832 333344
-;;;;;;  92000))
-;;; Generated autoloads from goto-chg.el
+;;;### (autoloads nil "goto-chg" "../../../../.emacs.d/elpa/goto-chg-20131228.1459/goto-chg.el"
+;;;;;;  "9a8c47848ba3c301e0a5907105a82d4c")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/goto-chg-20131228.1459/goto-chg.el
 
 (autoload 'goto-last-change "goto-chg" "\
 Go to the point where the last edit was made in the current buffer.
@@ -39,6 +39,12 @@ Go back to more recent changes after \\[goto-last-change] have been used.
 See `goto-last-change' for use of prefix argument.
 
 \(fn ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/goto-chg-20131228.1459/goto-chg-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/goto-chg-20131228.1459/goto-chg.el")
+;;;;;;  (21864 41224 76527 279000))
 
 ;;;***
 
