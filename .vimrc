@@ -1,32 +1,31 @@
-set nocompatible       " We're running Vim, not Vi!
+set nocompatible
+
 filetype plugin indent on
 
-syntax on              " Enable syntax highlighting
+syntax enable
+set background=dark
 colorscheme solarized
 
 set shortmess+=I
 
 set number
-set ruler
-
 set cursorline
+set ruler
 
 set linebreak
 map j gj
 map k gk
 
-set expandtab          " Always uses spaces instead of tabs
-set shiftwidth=2       " An indent is 2 spaces
-set softtabstop=2      " Insert 2 spaces when tab is pressed
+set expandtab
+set shiftwidth=2
+set softtabstop=2
 
-set noswapfile
+set ignorecase smartcase
+set incsearch
+set hlsearch
+
 set undofile
 
-set ignorecase
-set smartcase
-
-set hlsearch
-set incsearch
 set showmatch
 
 map Y y$
