@@ -1,9 +1,18 @@
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/"))
+
 (package-initialize)
+(mapc (lambda (package) (unless (package-installed-p package) (package-install package))) '(evil
+                                                                                            flycheck
+                                                                                            monokai-theme
+                                                                                            undo-tree
+
+                                                                                            web-mode))
+(load-theme 'monokai t)
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-(load-theme 'monokai t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -26,10 +35,6 @@
  '(initial-major-mode (quote ruby-mode))
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
- '(package-archives
-   (quote
-    (("melpa" . "http://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(undo-tree-auto-save-history t)
