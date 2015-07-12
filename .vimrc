@@ -13,8 +13,6 @@ set cursorline
 set ruler
 
 set linebreak
-map j gj
-map k gk
 
 set expandtab
 set shiftwidth=2
