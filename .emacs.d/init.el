@@ -1,16 +1,9 @@
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
-
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
-(mapc (lambda (package) (unless (package-installed-p package) (package-install package))) '(evil
-                                                                                            flycheck
-                                                                                            monokai-theme
-                                                                                            undo-tree
-
-                                                                                            web-mode))
+(when (not package-archive-contents) (package-refresh-contents))
+(mapc (lambda (package) (unless (package-installed-p package) (package-install package))) '(evil flycheck monokai-theme undo-tree web-mode))
 (load-theme 'monokai t)
-
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
@@ -22,15 +15,11 @@
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(desktop-save-mode t)
- '(evil-ex-search-vim-style-regexp t)
- '(evil-magic (quote very-magic))
  '(evil-mode t)
- '(evil-search-module (quote evil-search))
  '(global-flycheck-mode t)
  '(global-hl-line-mode t)
  '(global-linum-mode t)
  '(global-undo-tree-mode t)
- '(global-visual-line-mode t)
  '(indent-tabs-mode nil)
  '(initial-major-mode (quote ruby-mode))
  '(initial-scratch-message nil)
