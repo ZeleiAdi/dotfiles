@@ -13,5 +13,4 @@ fi
 
 xset b off
 numlockx on
-xrdb -merge .Xresources
 exec i3
