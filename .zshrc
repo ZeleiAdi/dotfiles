@@ -8,7 +8,7 @@ HISTSIZE=65535
 SAVEHIST="$HISTSIZE"
 
 setopt PROMPT_SUBST;
-source ~/scripts/git-prompt.sh
+source ~/bin/git-prompt.sh
 PS1='%c$(__git_ps1 "[%s]") $ '
 
 export EDITOR="emacsclient -c"
@@ -18,7 +18,7 @@ export LESS='R'
 alias e='emacsclient -c'
 alias o='xdg-open'
 
-PATH="$HOME/scripts:$PATH"
+PATH="$HOME/bin:$PATH"
 
 if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
