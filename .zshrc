@@ -11,8 +11,8 @@ setopt PROMPT_SUBST;
 source ~/bin/git-prompt.sh
 PS1='%c$(__git_ps1 "[%s]") $ '
 
-export EDITOR="emacsclient -c"
-export PAGER="less"
+export EDITOR='emacsclient -c'
+export PAGER='less'
 export LESS='R'
 
 alias e='emacsclient -c'
