@@ -44,7 +44,7 @@
 
 (require 'powerline)
 (powerline-default-theme)
-(setq powerline-display-buffer-size t)
+(setq powerline-display-buffer-size nil)
 (setq powerline-display-mule-info nil)
 (setq powerline-display-hud nil)
 
