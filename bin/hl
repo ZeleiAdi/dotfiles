@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-if [ -z "$TEXT_VIMCOLOR_ANSI" ]
-then
-    export TEXT_VIMCOLOR_ANSI='Normal=bright_blue;Comment=italic bright_green;Constant=cyan;Identifier=blue;Statement=green;Preproc=orange;Type=yellow;Special=red;Underlined=violet;Error=bold red;Todo=bold magenta;'
-fi
-
-text-vimcolor "$@"
