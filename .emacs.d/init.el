@@ -43,9 +43,9 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:weight normal :height 120 :width normal :foundry "adobe" :family "Source Code Pro"))))
  '(powerline-active1 ((t (:background "#272822"))))
- '(powerline-active2 ((t (:background "#3d3e31"))))
+ '(powerline-active2 ((t (:background "#49483E"))))
  '(powerline-inactive1 ((t (:background "#272822"))))
- '(powerline-inactive2 ((t (:background "#3e3d31")))))
+ '(powerline-inactive2 ((t (:background "#49483E")))))
 
 (load-theme 'monokai t)
 
