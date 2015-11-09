@@ -26,3 +26,16 @@ fi
 
 export TERMINAL=st
 eval "$(perl -I$HOME/.perl5/lib/perl5 -Mlocal::lib=$HOME/.perl5)"
+
+m() {
+  if [ -f Makefile ]; then
+    make
+  else
+    if [ "$PWD" = / ]; then
+      echo 'sorry, could not find that makefile' >&2
+    else
+      (cd ..; m)
+    fi
+  fi
+}
+
