@@ -1,5 +1,7 @@
 set nocompatible
 
+set hidden
+
 filetype plugin indent on
 
 syntax enable
