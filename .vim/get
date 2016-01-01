@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 
 package_urls=(
-    'https://raw.githubusercontent.com/vim-perl/vim-perl/master/syntax/perl6.vim'
-    'https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim'
+'https://raw.githubusercontent.com/vim-perl/vim-perl/master/syntax/perl6.vim'
+'https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim'
 )
 
+(
+cd ~/.vim
 for package_url in "${package_urls[@]}"
 do
-    package_path=$(echo "$package_url" | sed -r 's|.*/([^/]+/[^/]+)|\1|')
-    package_dir="$(dirname "$package_path")"
-    if [ ! -d "$package_dir" ] 
-    then
-        echo "creating directory $package_dir"
-        mkdir -p "$package_dir"
-    fi
-    echo "downloading package from $package_url"
-    curl "$package_url" >"$package_path" 2>/dev/null
+  package_path=$(echo "$package_url" | sed -r 's|.*/([^/]+/[^/]+)|\1|')
+  package_dir="$(dirname "$package_path")"
+  if [ ! -d "$package_dir" ]
+  then
+    echo "creating directory $package_dir"
+    mkdir -p "$package_dir"
+  fi
+  echo "downloading package from $package_url"
+  curl "$package_url" >"$package_path" 2>/dev/null
 done
+)
