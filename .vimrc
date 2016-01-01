@@ -5,13 +5,13 @@ set hidden
 filetype plugin indent on
 
 syntax enable
-set background=dark
 colorscheme solarized
+set background=dark
 
 set shortmess+=I
 
-set number
-set cursorline
+set laststatus=2
+
 set ruler
 
 set linebreak
