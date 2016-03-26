@@ -32,6 +32,8 @@ set backspace=indent,eol,start
 set wildmode=longest,list
 map Y y$
 
+set title
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/altercation/vim-colors-solarized'
