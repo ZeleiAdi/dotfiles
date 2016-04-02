@@ -1,58 +1,50 @@
-short_pwd() {
-  exit=$?
-  pwd | awk '{ sub(ENVIRON["HOME"], "~"); print }'
-  return $exit
-}
+prompt() {
+  status=$1;
 
-branch() {
-  exit=$?
-  git rev-parse 2>/dev/null && printf "[%s]"  "$(git rev-parse --abbrev-ref HEAD)"
-  return $exit
-}
+  short_pwd() {
+    awk 'BEGIN { sub(ENVIRON["HOME"], "~", ENVIRON["PWD"]); print(ENVIRON["PWD"]) }'
+  }
 
-dollar() {
-  if [ "$?" -eq 0 ]
-  then
-    printf '$'
-  else
-    printf "\033[31m\$\033[39m"
-  fi
-}
-
-set_prompt() {
-  PS1='$(short_pwd)$(branch) $(dollar) '
-}
-
-m() {
-  if [ -f Makefile ]; then
-    make "$@"
-  else
-    if [ "$PWD" = / ]; then
-      return 1
-    else
-      (cd ..; m "$@")
+  branch() {
+    if git rev-parse 2>/dev/null; then
+      git rev-parse --abbrev-ref HEAD 2>/dev/null
     fi
-  fi
+  }
+
+  dollar() {
+    if [ "$status" -eq 0 ]; then
+      printf '%s' '$'
+    else
+      printf '\001\033[31m\002%s\001\033[39m\002' '$'
+    fi
+  }
+
+  printf '\001\033]2;%s\007\002' "$(short_pwd)"
+  printf '%s[%s] %s ' "$(short_pwd)" "$(branch)" "$(dollar)"
+  unset -v status
+  unset -f branch short_pwd dollar
 }
 
-t() {
-  m test
-}
+PS1='$(prompt $?)'
 
-e() {
- emacsclient -c "$@" || ( emacs --daemon && emacsclient -c "$@" )
-}
-
-PATH="$HOME/bin:$PATH"
 if which ruby >/dev/null && which gem >/dev/null; then
   PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
-eval "$(perl -I$HOME/.perl5/lib/perl5 -Mlocal::lib=$HOME/.perl5)"
 
-export VISUAL='e'
-export EDITOR='e'
+PATH="$HOME/perl5/bin:$PATH"
+PATH="$HOME/bin:$PATH"
+
+export VISUAL='vim'
+export EDITOR='vim'
 export PAGER='less'
+
+export PERL5LIB="$HOME/perl5/lib/perl5"
+
 export LESS='-R'
 
-set_prompt
-
+alias m='makeup'
+alias t='makeup test'
+alias d='git diff --no-index'
+alias l='ls'
+alias ll='ls -lh'
+alias la='ls -Alh'
