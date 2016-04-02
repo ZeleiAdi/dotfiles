@@ -13,4 +13,5 @@ fi
 
 xset b off
 numlockx on
+export TERMINAL=st
 exec i3

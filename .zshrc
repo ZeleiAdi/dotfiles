@@ -1,5 +1,4 @@
 . ~/.profile
-
 bindkey -e
 
 autoload -Uz compinit
@@ -11,5 +10,3 @@ SAVEHIST="$HISTSIZE"
 
 setopt PROMPT_SUBST
 setopt HIST_IGNORE_DUPS
-
-export TERMINAL=st
