@@ -37,15 +37,13 @@ set title
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/altercation/vim-colors-solarized'
-
-Plug 'https://github.com/lambdatoast/elm.vim'
 Plug 'https://github.com/vim-ruby/vim-ruby'
 Plug 'https://github.com/vim-perl/vim-perl'
-Plug 'https://github.com/scroolose/syntastic'
 
 call plug#end()
 
 colorscheme solarized
 set background=dark
 
-autocmd BufNewFile *.pl 0r ~/.vim/skeleton.pl | $
+autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e | $
+autocmd FileType ruby setlocal iskeyword+=?,!
