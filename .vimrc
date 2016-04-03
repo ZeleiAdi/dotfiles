@@ -47,3 +47,5 @@ set background=dark
 
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e | $
 autocmd FileType ruby setlocal iskeyword+=?,!
+
+set tags=./tags;,tags;
