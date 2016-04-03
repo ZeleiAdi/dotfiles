@@ -1,0 +1,2 @@
+. ~/.profile
+export HISTCONTROL='ignoreboth'
