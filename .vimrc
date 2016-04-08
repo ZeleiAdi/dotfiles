@@ -23,6 +23,8 @@ set incsearch
 set hlsearch
 
 set undofile
+
+silent! call mkdir($HOME . '/.vim/undo', 'p')
 set undodir=~/.vim/undo
 
 set showmatch
@@ -36,9 +38,9 @@ set title
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/altercation/vim-colors-solarized'
-Plug 'https://github.com/vim-ruby/vim-ruby'
-Plug 'https://github.com/vim-perl/vim-perl'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'vim-perl/vim-perl', { 'for': 'perl' }
 
 call plug#end()
 
