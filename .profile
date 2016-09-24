@@ -1,5 +1,5 @@
 prompt() {
-  status=$1;
+  last_status=$1;
 
   short_pwd() {
     awk 'BEGIN { sub(ENVIRON["HOME"], "~", ENVIRON["PWD"]); print(ENVIRON["PWD"]) }'
@@ -12,7 +12,7 @@ prompt() {
   }
 
   dollar() {
-    if [ "$status" -eq 0 ]; then
+    if [ "$last_status" -eq 0 ]; then
       printf '%s' '$'
     else
       printf '\001\033[31m\002%s\001\033[39m\002' '$'
@@ -21,7 +21,7 @@ prompt() {
 
   printf '\001\033]2;%s\007\002' "$(short_pwd)"
   printf '%s[%s] %s ' "$(short_pwd)" "$(branch)" "$(dollar)"
-  unset -v status
+  unset -v last_status
   unset -f branch short_pwd dollar
 }
 
@@ -33,6 +33,7 @@ fi
 
 PATH="$HOME/perl5/bin:$PATH"
 PATH="$HOME/bin:$PATH"
+PATH="$HOME/.perl6/bin:$PATH"
 
 export VISUAL='vim'
 export EDITOR='vim'
@@ -45,6 +46,6 @@ export LESS='-R'
 alias m='makeup'
 alias t='makeup test'
 alias d='git diff --no-index'
-alias l='ls'
+alias l='ls -1'
 alias ll='ls -lh'
 alias la='ls -Alh'

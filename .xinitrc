@@ -1,4 +1,4 @@
-#!/bit/sh
+#!/bin/sh
 #
 # ~/.xinitrc
 #
@@ -13,5 +13,10 @@ fi
 
 xset b off
 numlockx on
-export TERMINAL=st
-exec i3
+
+export PANEL_FIFO=/tmp/panel-fifo
+export PANEL_HEIGHT=24
+export PANEL_FONT='Source Code Pro:size=12'
+export PANEL_WM_NAME=bspwm_panel
+
+exec bspwm

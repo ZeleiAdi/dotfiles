@@ -30,6 +30,7 @@ set undodir=~/.vim/undo
 set showmatch
 
 set backspace=indent,eol,start
+set nojoinspaces
 
 set wildmode=longest,list
 map Y y$
@@ -49,5 +50,6 @@ set background=dark
 
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e | $
 autocmd FileType ruby setlocal iskeyword+=?,!
+autocmd FileType * setlocal formatoptions-=cro
 
 set tags=./tags;,tags;
