@@ -1,0 +1,71 @@
+#!/bin/sh
+
+red() {
+  if [ "$#" -eq 1 ]; then
+    str="$1"
+
+    printf '\001\033[31m\002%s\001\033[39m\002' "$str"
+  else
+    printf "usage: red str" >&2
+    exit 1
+  fi
+}
+
+dollar() {
+  if [ "$#" -eq 1 ]; then
+    n="$1"
+
+    if [ "$n" -eq 0 ]; then
+      printf '%s' '$'
+    else
+      printf '%s' "$(red '$')"
+    fi
+  else
+    printf "usage: dollar n" >&2
+    exit 1
+  fi
+}
+
+maybe_printf() {
+  if [ "$#" -eq 2 ]; then
+    fmt="$1"
+    str="$2"
+
+    if [ -n "$str" ]; then
+      printf "$fmt" "$str"
+    fi
+  else
+    printf "usage: maybe_printf fmt str" >&2
+    exit 1
+  fi
+}
+
+branch() {
+  git rev-parse --abbrev-ref HEAD 2>/dev/null
+}
+
+title() {
+  if [ "$#" -eq 1 ]; then
+    str="$1"
+
+    printf '\001\033]2;%s\007\002' "$short_pwd"
+  else
+    printf 'usage: title str' >&2
+    exit 1
+  fi
+}
+
+if [ "$#" -eq 1 ]; then
+  last_status="$1"
+
+  short_pwd="$(unexpand_tilde "$PWD")"
+  branch="$(maybe_printf '[%s]' "$(branch)" )"
+  dollar="$(dollar "$last_status")"
+  printf '%s%s %s ' "$short_pwd" "$branch" "$dollar"
+
+  title="$(title short_pwd)"
+  printf '%s' "$title"
+else
+  printf "usage: %s last_status" "$0" >&2
+  exit 1
+fi

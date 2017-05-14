@@ -10,8 +10,6 @@ set shortmess+=I
 
 set laststatus=2
 
-" set ruler
-
 set linebreak
 
 set expandtab
@@ -39,13 +37,20 @@ set title
 
 set noeb vb t_vb=
 
+set tags=./tags;,tags;
+
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
-Plug 'tpope/vim-commentary'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'vim-perl/vim-perl', { 'for': 'perl' }
+Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
+
+Plug 'tpope/vim-commentary'
+Plug 'ntpeters/vim-better-whitespace'
+
 Plug 'w0rp/ale'
+
+Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
@@ -57,8 +62,6 @@ set statusline=%<%f\ %h%m%r%=%{ALEGetStatusLine()}\ %-14.(%l,%c%V%)\ %P
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e | $
 autocmd FileType ruby setlocal iskeyword+=?,!
 autocmd FileType * setlocal formatoptions-=cro
-
-set tags=./tags;,tags;
 
 cmap w!! w !sudo tee % >/dev/null
 
