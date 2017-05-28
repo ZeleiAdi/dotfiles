@@ -31,9 +31,7 @@ maybe_printf() {
     fmt="$1"
     str="$2"
 
-    if [ -n "$str" ]; then
-      printf "$fmt" "$str"
-    fi
+    [ -n "$str" ] && printf "$fmt" "$str"
   else
     printf "usage: maybe_printf fmt str" >&2
     exit 1

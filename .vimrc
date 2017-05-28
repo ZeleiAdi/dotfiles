@@ -61,7 +61,7 @@ set statusline=%<%f\ %h%m%r%=%{ALEGetStatusLine()}\ %-14.(%l,%c%V%)\ %P
 
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e | $
 autocmd FileType ruby setlocal iskeyword+=?,!
-autocmd FileType * setlocal formatoptions-=cro
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 cmap w!! w !sudo tee % >/dev/null
 
