@@ -42,13 +42,14 @@ set tags=./tags;,tags;
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-rails'
+
 Plug 'vim-perl/vim-perl', { 'for': 'perl' }
-Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
+
+Plug 'w0rp/ale'
 
 Plug 'tpope/vim-commentary'
 Plug 'ntpeters/vim-better-whitespace'
-
-Plug 'w0rp/ale'
 
 Plug 'altercation/vim-colors-solarized'
 
